@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Já tomou banho hoje?</title>
   <style>
     body {
@@ -17,42 +17,49 @@
       align-items: center;
       user-select: none;
     }
+
     h1 {
-      margin-bottom: 40px;
       font-size: 2.5rem;
+      margin-bottom: 50px;
+      text-align: center;
     }
+
     .buttons {
       position: relative;
       width: 300px;
       display: flex;
       justify-content: space-around;
     }
+
     button {
       padding: 15px 30px;
       font-size: 1.2rem;
-      cursor: pointer;
       border: none;
       border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
       user-select: none;
-      transition: background-color 0.3s ease;
     }
-    button#sim {
-      background-color: #28a745;
-      color: white;
+
+    #sim {
       position: absolute;
       left: 50%;
-      top: 0;
       transform: translateX(-50%);
+      top: 0;
+      background-color: #28a745;
+      color: #fff;
     }
-    button#nao {
-      background-color: #dc3545;
-      color: white;
+
+    #nao {
       position: relative;
+      background-color: #dc3545;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <h1>Já tomou banho hoje?</h1>
+
   <div class="buttons">
     <button id="sim">Sim</button>
     <button id="nao">Não</button>
@@ -62,30 +69,30 @@
     const simBtn = document.getElementById('sim');
     const btnContainer = document.querySelector('.buttons');
 
-    // Função para mover o botão "Sim" para uma posição aleatória dentro do container
     function moveSimBtn() {
       const containerRect = btnContainer.getBoundingClientRect();
       const btnRect = simBtn.getBoundingClientRect();
 
+      // Calcula posições aleatórias dentro do container
       const maxX = containerRect.width - btnRect.width;
       const maxY = containerRect.height - btnRect.height;
 
-      // Gera posições aleatórias dentro do container (mas limitado a 0 porque o container tem só uma linha)
       const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY; // vai ser zero porque container é flex em linha
+      const randomY = Math.random() * maxY;
 
       simBtn.style.left = `${randomX}px`;
       simBtn.style.top = `${randomY}px`;
     }
 
+    // Sempre que o mouse passar sobre o botão "Sim", ele foge
     simBtn.addEventListener('mouseenter', moveSimBtn);
 
-    // Opcional: quando o usuário clicar em "Não"
+    // Clique no botão "Não" apenas para efeito
     document.getElementById('nao').addEventListener('click', () => {
       alert('Você deveria tomar um banho! 😉');
     });
 
-    // Começa com o botão sim no centro
+    // Posicionamento inicial
     simBtn.style.left = '50%';
     simBtn.style.top = '0';
     simBtn.style.transform = 'translateX(-50%)';
