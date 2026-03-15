@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Já tomou banho hoje?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: #222;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .buttons {
+      position: relative;
+      width: 300px;
+      height: 80px; /* altura definida para que o botão absoluto apareça */
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    #sim {
+      position: absolute;
+      background-color: #28a745;
+      color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #nao {
+      position: relative;
+      background-color: #dc3545;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Já tomou banho hoje?</h1>
+
+  <div class="buttons">
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const simBtn = document.getElementById('sim');
+    const btnContainer = document.querySelector('.buttons');
+
+    function moveSimBtn() {
+      const containerRect = btnContainer.getBoundingClientRect();
+      const btnRect = simBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      // posições aleatórias dentro do container
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      simBtn.style.left = `${randomX}px`;
+      simBtn.style.top = `${randomY}px`;
+      simBtn.style.transform = 'translate(0, 0)'; // remove o translate do centro
+    }
+
+    // Botão "Sim" foge quando o mouse entra
+    simBtn.addEventListener('mouseenter', moveSimBtn);
+
+    // Botão "Não" apenas mostra alerta
+    document.getElementById('nao').addEventListener('click', () => {
+      alert('credo, que cascona');
+    });
+  </script>
+</body>
+</html>
