@@ -27,8 +27,10 @@
     .buttons {
       position: relative;
       width: 300px;
+      height: 80px; /* altura definida para que o botão absoluto apareça */
       display: flex;
       justify-content: space-around;
+      align-items: center;
     }
 
     button {
@@ -43,11 +45,11 @@
 
     #sim {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
       background-color: #28a745;
       color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
 
     #nao {
@@ -73,29 +75,25 @@
       const containerRect = btnContainer.getBoundingClientRect();
       const btnRect = simBtn.getBoundingClientRect();
 
-      // Calcula posições aleatórias dentro do container
       const maxX = containerRect.width - btnRect.width;
       const maxY = containerRect.height - btnRect.height;
 
+      // posições aleatórias dentro do container
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
 
       simBtn.style.left = `${randomX}px`;
       simBtn.style.top = `${randomY}px`;
+      simBtn.style.transform = 'translate(0, 0)'; // remove o translate do centro
     }
 
-    // Sempre que o mouse passar sobre o botão "Sim", ele foge
+    // Botão "Sim" foge quando o mouse entra
     simBtn.addEventListener('mouseenter', moveSimBtn);
 
-    // Clique no botão "Não" apenas para efeito
+    // Botão "Não" apenas mostra alerta
     document.getElementById('nao').addEventListener('click', () => {
-      alert('Cascona em fia');
+      alert('Você deveria tomar um banho! 😉');
     });
-
-    // Posicionamento inicial
-    simBtn.style.left = '50%';
-    simBtn.style.top = '0';
-    simBtn.style.transform = 'translateX(-50%)';
   </script>
 </body>
 </html>
