@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Me doa um gatinho?</title>
+  <title>Já tomou banho hoje?</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -61,7 +61,7 @@
   </style>
 </head>
 <body>
-  <h1>Me doa um gatinho?</h1>
+  <h1>Já tomou banho hoje?</h1>
 
   <div class="buttons">
     <button id="sim">Sim</button>
@@ -88,12 +88,12 @@
       simBtn.style.transform = 'translate(0, 0)';
     }
 
-    // sempre que o mouse passar sobre o "Não", ele foge
+    // sempre que o mouse passar sobre o "Sim", ele foge
     simBtn.addEventListener('mouseenter', moveSimBtn);
 
-    // alerta ao clicar no "Sim"
-    document.getElementById('sim').addEventListener('click', () => {
-      alert('Manda o jubis pra cá');
+    // alerta ao clicar no "Não"
+    document.getElementById('nao').addEventListener('click', () => {
+      alert('Credo, que cascona!!');
     });
   </script>
 </body>
