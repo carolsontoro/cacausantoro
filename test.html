@@ -20,99 +20,72 @@
     }
 
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       text-align: center;
     }
 
-    .buttons {
+    #gameArea {
       position: relative;
       width: 500px;
-      height: 200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 300px;
+      border: 2px dashed #ffb6c1;
     }
 
     button {
-      padding: 15px 25px;
-      font-size: 1.1rem;
+      position: absolute;
+      padding: 10px 15px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
-      background: #000;
+      background: black;
       color: #ffb6c1;
-      position: absolute;
+      cursor: pointer;
     }
 
     #dois {
       left: 50px;
-      top: 80px;
+      top: 50px;
     }
 
     #presente {
       right: 50px;
-      top: 80px;
+      bottom: 50px;
     }
 
     /* CARTA */
     .carta {
       position: absolute;
       bottom: -200px;
-      width: 200px;
-      height: 130px;
-      background: #fff;
-      border-radius: 5px;
+      width: 220px;
+      height: 140px;
+      background: white;
+      color: black;
+      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #000;
-      font-weight: bold;
       text-align: center;
       padding: 10px;
-      transition: all 0.8s ease;
       opacity: 0;
+      transition: all 0.8s ease;
     }
 
-    .carta.aberta {
+    .carta.show {
       bottom: 50px;
       opacity: 1;
-    }
-
-    .bilhete {
-      display: none;
-      font-size: 0.9rem;
-    }
-
-    .carta.aberta .bilhete {
-      display: block;
-    }
-
-    .fechada {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #ddd;
-    }
-
-    .carta.aberta .fechada {
-      display: none;
     }
   </style>
 </head>
 <body>
 
-  <h1>2 reais ou um presente misterioso?</h1>
+  <h1>🎯 Desafio: Clique no presente!</h1>
+  <p>Mas cuidado com os 2 reais 😈</p>
 
-  <div class="buttons">
+  <div id="gameArea">
     <button id="dois">2 reais</button>
-    <button id="presente">Presente misterioso</button>
-  </div>
+    <button id="presente">🎁 Presente</button>
 
-  <div class="carta" id="carta">
-    <div class="fechada"></div>
-    <div class="bilhete">
-      Parabéns 💖<br><br>
+    <div class="carta" id="carta">
+      💖 Parabéns!<br><br>
       Você ganhou uma<br>
       ruiva, tagarela,<br>
       ciumenta e nerd 😌
@@ -120,13 +93,14 @@
   </div>
 
   <script>
-    const doisBtn = document.getElementById('dois');
-    const container = document.querySelector('.buttons');
+    const dois = document.getElementById('dois');
+    const presente = document.getElementById('presente');
+    const area = document.getElementById('gameArea');
     const carta = document.getElementById('carta');
 
-    function fugir() {
-      const rect = container.getBoundingClientRect();
-      const btnRect = doisBtn.getBoundingClientRect();
+    function moverDois() {
+      const rect = area.getBoundingClientRect();
+      const btnRect = dois.getBoundingClientRect();
 
       const maxX = rect.width - btnRect.width;
       const maxY = rect.height - btnRect.height;
@@ -134,14 +108,19 @@
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
 
-      doisBtn.style.left = x + 'px';
-      doisBtn.style.top = y + 'px';
+      dois.style.left = x + "px";
+      dois.style.top = y + "px";
     }
 
-    doisBtn.addEventListener('mouseenter', fugir);
+    // botão foge ao aproximar
+    dois.addEventListener('mouseenter', moverDois);
 
-    document.getElementById('presente').addEventListener('click', () => {
-      carta.classList.add('aberta');
+    // também fica se mexendo sozinho (modo caos 😈)
+    setInterval(moverDois, 1200);
+
+    // clicar no presente ganha
+    presente.addEventListener('click', () => {
+      carta.classList.add('show');
     });
   </script>
 
