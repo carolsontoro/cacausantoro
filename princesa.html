@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Já tomou agua hoje?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: #800020; /* vinho */
+      color: #ffb6c1; /* rosa claro */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .buttons {
+      position: relative;
+      width: 500px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      background-color: #000; /* preto */
+      color: #ffb6c1;
+    }
+
+    #sim {
+      position: relative;
+      margin-right: 180px;
+    }
+
+    #nao {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <h1>Já tomou banho hoje?</h1>
+
+  <div class="buttons">
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const naoBtn = document.getElementById('nao');
+    const btnContainer = document.querySelector('.buttons');
+
+    function moveNaoBtn() {
+      const containerRect = btnContainer.getBoundingClientRect();
+      const btnRect = naoBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      naoBtn.style.left = `${randomX}px`;
+      naoBtn.style.top = `${randomY}px`;
+      naoBtn.style.transform = 'translate(0, 0)';
+    }
+
+    // agora quem foge é o "Não"
+    naoBtn.addEventListener('mouseenter', moveNaoBtn);
+
+    // ação do botão "Sim"
+    document.getElementById('sim').addEventListener('click', () => {
+      alert('chega ficou mais linda');
+    });
+  </script>
+</body>
+</html>
