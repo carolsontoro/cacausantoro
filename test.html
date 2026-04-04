@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolha com sabedoria...</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: #800020;
+      color: #ffb6c1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .buttons {
+      position: relative;
+      width: 500px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #000;
+      color: #ffb6c1;
+      position: absolute;
+    }
+
+    #dois {
+      left: 50px;
+      top: 80px;
+    }
+
+    #presente {
+      right: 50px;
+      top: 80px;
+    }
+
+    /* CARTA */
+    .carta {
+      position: absolute;
+      bottom: -200px;
+      width: 200px;
+      height: 130px;
+      background: #fff;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      transition: all 0.8s ease;
+      opacity: 0;
+    }
+
+    .carta.aberta {
+      bottom: 50px;
+      opacity: 1;
+    }
+
+    .bilhete {
+      display: none;
+      font-size: 0.9rem;
+    }
+
+    .carta.aberta .bilhete {
+      display: block;
+    }
+
+    .fechada {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #ddd;
+    }
+
+    .carta.aberta .fechada {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>2 reais ou um presente misterioso?</h1>
+
+  <div class="buttons">
+    <button id="dois">2 reais</button>
+    <button id="presente">Presente misterioso</button>
+  </div>
+
+  <div class="carta" id="carta">
+    <div class="fechada"></div>
+    <div class="bilhete">
+      Parabéns 💖<br><br>
+      Você ganhou uma<br>
+      ruiva, tagarela,<br>
+      ciumenta e nerd 😌
+    </div>
+  </div>
+
+  <script>
+    const doisBtn = document.getElementById('dois');
+    const container = document.querySelector('.buttons');
+    const carta = document.getElementById('carta');
+
+    function fugir() {
+      const rect = container.getBoundingClientRect();
+      const btnRect = doisBtn.getBoundingClientRect();
+
+      const maxX = rect.width - btnRect.width;
+      const maxY = rect.height - btnRect.height;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      doisBtn.style.left = x + 'px';
+      doisBtn.style.top = y + 'px';
+    }
+
+    doisBtn.addEventListener('mouseenter', fugir);
+
+    document.getElementById('presente').addEventListener('click', () => {
+      carta.classList.add('aberta');
+    });
+  </script>
+
+</body>
+</html>
